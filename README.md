@@ -1,120 +1,158 @@
-# Veda 🌑  
-**Your rhythm in dark**
+# VEDA — AI Mental Health Companion
 
-Veda is a calm, emotionally present conversational companion designed to sit with users during heavy or overwhelming moments.  
-It is not a therapist, not a diagnostic tool, and not a productivity chatbot — Veda’s role is presence, reflection, and gentle grounding.
-
-This project is a personal, open-source, full-stack AI system built using:
-- A custom frontend built with React (Vite)
-- A FastAPI backend
-- A local open-source LLM via Ollama
-- Optional RAG (retrieval-augmented generation)
-- Session-based memory (no login required)
+A full-stack AI system designed to provide emotionally aware, context-sensitive conversational support. VEDA focuses on presence, reflection, and grounded dialogue using local LLM inference and optional retrieval augmentation.
 
 ---
 
-## ✨ What Veda Is (and Isn’t)
+## Overview
 
- Veda is:
-- Emotion-first and presence-based  
-- Calm, warm, and non-clinical  
-- Designed for short, reflective conversations  
-- Local-first and privacy-respecting  
-
- Veda is not:
-- A therapist or medical professional  
-- A diagnostic or crisis-response system  
-- Advice-heavy or instructional  
-
-
-
-## 🧠 How Ved Works 
-
-Frontend (React)
-↓
-FastAPI backend (/chat)
-↓
-Veda Engine (prompt + memory)
-↓
-Ollama (local LLM: mistral)
-↓
-Response back to UI
-
-- The frontend is responsible **only for UI**
-- All intelligence lives in the backend
-- The LLM runs **locally** using Ollama
-- No user accounts, no tracking, no external APIs required
-
+VEDA is an AI-powered conversational system built to simulate calm, human-like interactions during emotionally heavy or reflective moments. The system prioritizes contextual understanding, low-latency interaction, and privacy through local model execution.
 
 ---
 
-## 🚀 Getting Started (Local Setup)
+## Architecture
 
-1️⃣ Prerequisites
+```
+Frontend (React + Vite)
+        ↓
+FastAPI Backend (/chat endpoint)
+        ↓
+Conversation Engine (prompt + session memory)
+        ↓
+Local LLM (Ollama - Mistral)
+        ↓
+Response returned to UI
+```
 
+---
+
+## Key Features
+
+- Context-aware conversational responses  
+- Session-based memory (no authentication required)  
+- Local LLM inference via Ollama (no external API dependency)  
+- Optional Retrieval-Augmented Generation (RAG) pipeline  
+- Modular backend architecture for extensibility  
+- Lightweight and responsive frontend interface  
+
+---
+
+## Tech Stack
+
+| Layer        | Technology                     |
+|-------------|-------------------------------|
+| Frontend     | React, Vite, Tailwind CSS     |
+| Backend      | FastAPI                       |
+| LLM Runtime  | Ollama (Mistral)              |
+| Language     | Python, TypeScript            |
+| RAG (Optional)| Custom vectorstore pipeline  |
+
+---
+
+## System Design
+
+- Frontend handles UI and user interaction only  
+- Backend manages all logic, prompting, and memory  
+- LLM runs locally for privacy and cost efficiency  
+- Memory is session-scoped and non-persistent  
+- RAG integrates contextual retrieval when enabled  
+
+---
+
+## Setup
+
+### Prerequisites
 - Python 3.10+
 - Node.js 18+
 - Ollama installed → https://ollama.com
 
+---
 
-2️⃣ Clone the repo
+### Installation
 
 ```bash
-git clone https://github.com/Srishh1/VEDA-YOUR-MENTAL-COMPANION.git
-cd veda-bot
+git clone https://github.com/lavanya0505/VEDA-AI-COMPANION.git
+cd VEDA-AI-COMPANION
+```
 
-3️⃣ Set up Python backend
+---
+
+### Backend Setup
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
 
-4️⃣ Install the LLM (one-time)
+---
+
+### Install Model
+
+```bash
 ollama pull mistral
+```
 
-5️⃣ Run the backend
+---
+
+### Run Backend
+
+```bash
 uvicorn main:app --reload
+```
 
-6️⃣ Run the frontend
-cd frontend/veda
+---
+
+### Run Frontend
+
+```bash
+cd Frontend/veda
 npm install
 npm run dev
+```
 
-----
+---
 
-###💬 Session Memory (No Login Required)
+## Session Memory
 
--Ved uses session-based memory, not user       accounts.
--Each browser session is assigned a random session_id
--Memory lasts for the duration of the session
--Closing the tab starts a fresh conversation
--No authentication or personal data is stored
--This is intentional and appropriate for a mental-health-adjacent companion.
+- Each session is assigned a unique session ID  
+- Memory persists only during active session  
+- No user accounts or stored personal data  
+- Stateless reset on session end  
 
-###📚 Retrieval-Augmented Generation (Optional)
+---
 
--If vectorstore.py is present and configured:
--Ved can retrieve relevant background context
--Context is injected gently, never quoted directly
--Emotional presence always comes before factual grounding
--RAG failures are handled safely and never block responses.
+## Retrieval-Augmented Generation (Optional)
 
-### ⚡ Performance Notes
+- Enables contextual grounding via vectorstore  
+- Injects relevant context into prompt pipeline  
+- Designed to be non-intrusive and fallback-safe  
 
--First response may take ~3 seconds (model warm-up)
--Subsequent responses typically ~1.5–2 seconds
--Designed for perceived calm, not rapid-fire replies
+---
 
-###🛡️ Safety & Ethics
+## Performance
 
--Veda does not diagnose, treat, or provide medical advice
--Responses are non-clinical and non-authoritative
--Crisis language is avoided unless explicitly prompted
--Memory is short-term and user-controlled
--This project is intended for learning, exploration, and personal use.
+- Initial response latency: ~2–3 seconds  
+- Subsequent responses: ~1–2 seconds  
+- Optimized for stability and conversational flow  
 
-###🧪 Development Notes
+---
 
--Backend logic lives entirely in engine.py
--main.py is intentionally thin (API glue only)
--Frontend contains no prompt logic
--LLM can be swapped easily via Ollama
+## Safety Considerations
+
+- No medical or diagnostic claims  
+- Non-authoritative responses  
+- Designed for general conversational support  
+- Not a substitute for professional help  
+
+---
+
+## Development Notes
+
+- Core logic implemented in `engine.py`  
+- API layer kept minimal (`main.py`)  
+- Frontend contains no model logic  
+- LLM backend is easily swappable  
+
+---
+
